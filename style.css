@@ -22,6 +22,9 @@ a {
   padding: 5px;
 }
 
+canvas#pong {
+    border: 2px solid black
+}
 
 html { 
   font-family: century-gothic, sans-serif;
