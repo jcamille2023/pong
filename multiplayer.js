@@ -10,15 +10,15 @@ const list_players = document.getElementById("lists_of_games");
   // https://firebase.google.com/docs/web/setup#available-libraries
 
   // Your web app's Firebase configuration
-  const firebaseConfig = {
-  apiKey: "AIzaSyB-aP1AEjzCLPCs7Yg4GY_Z4pnLZ8T2qys",
-  authDomain: "ping-pong-online.firebaseapp.com",
-  projectId: "ping-pong-online",
-  storageBucket: "ping-pong-online.appspot.com",
-  messagingSenderId: "213821744223",
-  appId: "1:213821744223:web:d86dbc68386c81a10567ea",
-  measurementId: "G-PXQC20J5RZ"
-};
+ const firebaseConfig = {
+    apiKey: "AIzaSyAjHsCstknxm_3cdBzYulCBSZLxSr1qqJQ",
+    authDomain: "ping-pong-online-4248e.firebaseapp.com",
+    projectId: "ping-pong-online-4248e",
+    storageBucket: "ping-pong-online-4248e.appspot.com",
+    messagingSenderId: "967048086805",
+    appId: "1:967048086805:web:2b5d4563794ed5934ed51c",
+    measurementId: "G-RBV9QDF1HP"
+  };
 
 
 
