@@ -67,8 +67,8 @@ onAuthStateChanged(auth, (user) => {
 			 console.log(data);
 			 if (data.player_2) {
 				 opponentId = data.player_2;
-				 document.getElementById("opponent_id").innerHTML += opponentId;
-         document.getElementById("start_button").setAttribute("style","");
+				 document.getElementById("opponent_id").innerHTML = opponentId;
+         			document.getElementById("start_button").setAttribute("style","");
 			 }
 		});
    }
@@ -76,6 +76,8 @@ onAuthStateChanged(auth, (user) => {
       get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         const data = snapshot.val();
         data.player_2 = playerId;
+	opponentId = data.player_1;
+	document.getElementById("opponent_id").innerHTML = opponentId;
         add_player_2(data);
       });
     }
