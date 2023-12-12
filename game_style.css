@@ -1,48 +1,38 @@
-box {
-  text-align: center;
+
+
+#pong {
+    width: 600px;
+    height: 400px;
+    border: 2px solid black
 }
 
-#main, #main > tbody > tr > td {
-  border: 1px solid;
-  padding: 5px;
-}
-
-
-
-#info-section {
-  color: antiquewhite
-}
-
-main {
-    text-align: center;
-    color: white;
-}
-
-#main {
-  margin: auto;
-}
-
-#back_to_lobby {
+html { 
+  font-family: century-gothic, sans-serif;
+  font-weight: 400;
+  font-style: normal;
   color: white;
-  background: transparent;
-  margin-top: 20px;
-  margin-left: 43%
-  
+  background: #0a0c37;
 }
 
-#info-half {
-  width: 20%;
+#pong{
+  position: relative;
 }
 
-#game {
-  margin-left: 40%;
+#ball {
+  position: absolute;
+  top: 183px;
+  left: 280px;
 }
 
-#game > table > tbody > tr > td > button {
-  width: 50px;
-  height: 50px;
-  font-size: 14pt;
-  color: #0e8538;
-  background: transparent;
+#l_paddle, #r_paddle {
+  position: absolute;
 }
 
+#l_paddle {
+  top:143px
+}
+
+#r_paddle {
+  top: 143px;
+  left: 569px;
+}
