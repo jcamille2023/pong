@@ -30,7 +30,9 @@ function random_number_gen() {
 var playerId;
 var opponentId;
 var gameId;
+var game_start;
 const searchParams = new URLSearchParams(window.location.search);
+console.log(searchParams.get('game_id'));
 if (searchParams.get('game_id') == "new") {
   gameId = random_number_gen();
 }
@@ -72,13 +74,13 @@ onAuthStateChanged(auth, (user) => {
    }
     else {
       get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
-        data = snapshot.val()
+        const data = snapshot.val();
         data.player_2 = playerId;
         add_player_2(data);
       });
     }
     var startRef = ref(database, "/games/" + gameId);
-		onValue(playersRef, (snapshot) => {
+		onValue(startRef, (snapshot) => {
 			 const data = snapshot.val();
 			 console.log(data);
 			 if (data.game_start == true) {
@@ -112,7 +114,3 @@ function delete_session() {
 
 window.start_game = start_game;
 window.delete_session = delete_session;
-
-
-
-
