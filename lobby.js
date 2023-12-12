@@ -75,6 +75,10 @@ onAuthStateChanged(auth, (user) => {
     else {
       get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         const data = snapshot.val();
+	if(data == null) {
+		document.getElementById("center").innerHTML = "<h1>Ping Pong Online</h1><br><p>This game does not exist.</p>";
+		document.getElementById("center").innerHTML += "<button onclick='window.location.href=https://jcamille2023.github.io/pong/'>Back to main menu</button>";
+	}
         data.player_2 = playerId;
 	opponentId = data.player_1;
 	document.getElementById("opponent_id").innerHTML = opponentId;
