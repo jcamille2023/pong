@@ -108,7 +108,6 @@ function playWith(a) {
         console.log(url);
         window.location.href = url;
        }
-       }
        else {
         var url = new URL("https://jcamille2023.github.io/pong/lobby/");
         url.searchParams.append('game_id', a);
