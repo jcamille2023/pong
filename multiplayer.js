@@ -103,11 +103,14 @@ function print_games(a) {
 window.print_games = print_games;
 function playWith(a) {
        if (a == "new") {
-        var url = new URL("https://jcamille2023.github.io/tictactoe/play/create");
+        var url = new URL("https://jcamille2023.github.io/pong/lobby/");
+        url.searchParams.append('game_id', "new");
+        console.log(url);
         window.location.href = url;
        }
+       }
        else {
-        var url = new URL("https://jcamille2023.github.io/tictactoe/play/join");
+        var url = new URL("https://jcamille2023.github.io/pong/lobby/");
         url.searchParams.append('game_id', a);
         console.log(url);
         window.location.href = url;
