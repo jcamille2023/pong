@@ -18,21 +18,4 @@ html {
   position: relative;
 }
 
-#ball {
-  position: absolute;
-  top: 183px;
-  left: 280px;
-}
 
-#l_paddle, #r_paddle {
-  position: absolute;
-}
-
-#l_paddle {
-  top:143px
-}
-
-#r_paddle {
-  top: 143px;
-  left: 569px;
-}
