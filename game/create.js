@@ -46,10 +46,18 @@ else {
 }
 dy = 2;
 
+
+function declare_win(a) {
+	let updates = {};
+	let win = {winner: a};
+	updates["/games/" + gameId + "/win"] = win;
+	update(dbRef,updates);
+}
+
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
-		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 10};
+		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
 		if(l_paddle_pos.ypos < 1 || l_paddle_pos > 291) {
 			return "Limit reached";
 		}
@@ -60,7 +68,10 @@ function keyDownHandler(e) {
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		// left_paddle.style.top = String(Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 10) - "px"; will be moved to control by firebase
 		let updates = {};
-		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 10};
+		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 15};
+		if(l_paddle_pos.ypos < 1 || l_paddle_pos > 291) {
+			return "Limit reached";
+		}
 		updates['/games/' + gameId + "/positions/left_paddle"] = l_paddle_pos;
 		update(dbRef, updates);
 	}
@@ -82,22 +93,24 @@ function move() {
 		if(ball_xpos >= 566) {
 			clearInterval(interval);
 			console.log("win - player_1");
+			declare_win(playerId);
 			return "player 1 wins";
 		}
 		else {
 			clearInterval(interval);
 			console.log("win - player_2");
+			declare_win(opponentId);
 			return "player 2 wins";
 		}
 	}
 	let ball_ypos = Number(ball.style.top.slice(0,ball.style.top.length-2));
 	
 	if(ball_ypos >= lp_pos && ball_ypos <= (lp_pos + 110) && ball_xpos <= 25 && direction_changed == false) {
-		dx = -dx;
+		dx = -1.25*dx;
 		direction_changed = true;
 	}
 	if(ball_ypos >= rp_pos && ball_ypos <= (rp_pos + 110) && ball_xpos >= 539 && direction_changed == false) {
-		dx = -dx;
+		dx = -1.25*dx;
 		direction_changed = true;
 	}
 	if(ball_ypos >= 367 || ball_ypos <= 0) {
@@ -143,6 +156,12 @@ onAuthStateChanged(auth, (user) => {
 			const data = snapshot.val();
 			console.log(data);
 			right_paddle.style.top = String(data.ypos) + "px";
+		});
+		var winRef =  ref(database, "/games/" + gameId + "/win");
+		onValue(winRef, (snapshot) => {
+			const data = snapshot.val();
+			console.log(data);
+			document.getElementById("game_winner").innerHTML = data.winner + " wins";
 		});
 		interval = setInterval(move, 10);
 }				
