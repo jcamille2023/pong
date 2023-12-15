@@ -48,6 +48,7 @@ function agree() {
 	updates["games/" + gameId + "/win/play_again"] = {play_again: true;}
 	update(dbRef, updates);
 }
+window.agree = agree;
 
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
