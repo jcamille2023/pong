@@ -26,10 +26,20 @@ var playerId;
 var opponentId;
 var interval;
 
+function back_to_lobby() {
+	set(ref(database,"games/" + gameId + "/delete"), {delete: true});
+	go_home();
+}
+window.back_to_lobby = back_to_lobby;
 function go_home() {
 	window.location.href = "https://jcamille2023.github.io/pong/";
 }
 window.go_home = go_home;
+function play_again() {
+	let updates = {};
+	updates["games/" + gameId + "/win/play_again"] = {play_again: playerId};
+}
+window.play_again = play_again;
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -41,14 +51,7 @@ function random_number_gen(b) {
 }
 
 
-const t = random_number_gen(40);
-if(t < 20) {
-	dx = 1;
-}
-else {
-	dx = -1;
-}
-dy = 2;
+
 
 
 function declare_win(a) {
@@ -131,7 +134,15 @@ function move() {
 	
 }
 function start_game() {
-	interval = setInterval(move,10)
+	const t = random_number_gen(40);
+	if(t < 20) {
+		dx = 1;
+	}
+	else {
+		dx = -1;
+	}
+	dy = 2;
+	interval = setInterval(move,10);
 }
 
 onAuthStateChanged(auth, (user) => {
@@ -179,6 +190,48 @@ onAuthStateChanged(auth, (user) => {
 			const data = snapshot.val();
 			console.log(data);
 			document.getElementById("game_winner").innerHTML = data.winner + " wins";
+		});
+		var deleteRef =  ref(database, "/games/" + gameId + "/delete");
+		onValue(deleteRef, (snapshot) => {
+			const data = snapshot.val();
+			if(data.delete == true) {
+				remove(ref(database, "/games/" + gameId));
+				go_home();
+			}
+		});
+		var playAgainRef =  ref(database, "/games/" + gameId + "/win/play_again");
+		onValue(playAgainRef, (snapshot) => {
+			const data = snapshot.val();
+			document.getElementById("play_again").remove();
+			let game_end_section = document.getElementById("game_end");
+			let p = document.createElement("p");
+			if (data.play_again == true) {
+				var ball_position = {xpos: 280, ypos: 183};
+				let updates = {};
+				updates['/games/' + gameId + "/positions/ball"] = ball_position;
+				let l_paddle_pos = {ypos: 143};
+				updates['/games/' + gameId + "/positions/left_paddle"] = l_paddle_pos;
+				update(dbRef, updates);
+				let r_paddle_pos = {ypos: 143};
+				updates['/games/' + gameId + "/positions/right_paddle"] = r_paddle_pos;
+				let win = {};
+				updates['/games/' + gameId + "/win/"] = win;
+				update(dbRef, updates);
+				start_game();
+			}
+			else if(data.play_again == playerId) {
+				p.innerHTML = "Sent a request to play again!";
+			}
+			else if(data.play_again == opponentId) {
+				p.innerHTML = opponentId + " sent a play again request.";
+			}
+			game_end_section.appendChild(p);
+			if(data.play_again == opponentId) {
+				let button = document.createElement("button");
+				button.setAttribute("onclick","agree");
+				button.innerHTML = "Play again?";
+				game_end_section.appendChild(button);
+			}
 		});
 		
 }				
