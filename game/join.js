@@ -26,7 +26,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
 const dbRef = ref(getDatabase());
-
+function go_home() {
+	window.location.href = "https://jcamille2023.github.io/pong/";
+}
+window.go_home = go_home;
 
 
 function keyDownHandler(e) {
@@ -59,6 +62,13 @@ onAuthStateChanged(auth, (user) => {
 		playerId = user.uid;
 		get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         		const data = snapshot.val();
+			if(data == null) {
+				document.getElementById("pong").innerHTML = "<p>This game does not exist.</p>";
+				let button = document.createElement("button");
+				button.setAttribute("onclick","go_home()")
+				button.innerHTML = "Back to main menu";
+				document.getElementById("center").appendChild(button); 
+			}
 			console.log(data);
 			console.log(data.player_1);
 			opponentId = data.player_1;
