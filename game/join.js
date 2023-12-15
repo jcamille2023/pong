@@ -38,13 +38,13 @@ function keyDownHandler(e) {
 		if(r_paddle_pos.ypos > 291) {
 			return "Limit reached";
 		}
-		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) + 15};
+		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
 		updates['/games/' + gameId + "/positions/right_paddle"] = r_paddle_pos;
 		update(dbRef, updates);
 	}
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
-		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) - 15};
+		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 15};
 		if(r_paddle_pos < 1) {
 			return "Limit reached";
 		}
