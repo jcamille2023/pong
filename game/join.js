@@ -45,7 +45,7 @@ window.play_again = play_again;
 
 function agree() {
 	let updates = {};
-	updates["games/" + gameId + "/win/play_again"] = {play_again: true}
+	updates["games/" + gameId + "/win/play_again"] = {play_again: true};
 	update(dbRef, updates);
 }
 window.agree = agree;
@@ -128,14 +128,13 @@ onAuthStateChanged(auth, (user) => {
 					let p = document.createElement("p");
 					let textNode = "Sent a request to play again!";
 					p.appendChild(textNode);
+					game_end_section.appendChild(p);
 				}
 				else if(data.play_again == opponentId) {
 					let p = document.createElement("p");
 					let textNode = opponentId + " wants to play again.";
 					p.appendChild(textNode);
-				}
-				game_end_section.appendChild(p);
-				if(data.play_again == opponentId) {
+					game_end_section.appendChild(p);
 					let button = document.createElement("button");
 					button.setAttribute("onclick","agree");
 					button.innerHTML = "Play again?";
