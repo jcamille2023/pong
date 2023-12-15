@@ -96,7 +96,7 @@ onAuthStateChanged(auth, (user) => {
 		var leftPaddleRef =  ref(database, "/games/" + gameId + "/positions/left_paddle");
 		onValue(leftPaddleRef, (snapshot) => {
 			const data = snapshot.val();
-			right_paddle.style.top = String(data.ypos) + "px";
+			right_paddle.style.top = String(290 - data.ypos) + "px";
 		});
 		var rightPaddleRef =  ref(database, "/games/" + gameId + "/positions/right_paddle");
 		onValue(rightPaddleRef, (snapshot) => {
