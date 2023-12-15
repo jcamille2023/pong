@@ -39,9 +39,15 @@ window.go_home = go_home;
 function play_again() {
 	let updates = {};
 	updates["games/" + gameId + "/win/play_again"] = {play_again: playerId};
+	update(dbRef, updates);
 }
 window.play_again = play_again;
 
+function agree() {
+	let updates = {}
+	updates["games/" + gameId + "/win/play_again"] = {play_again: true;}
+	update(dbRef, updates);
+}
 
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
@@ -106,21 +112,25 @@ onAuthStateChanged(auth, (user) => {
 		var winRef =  ref(database, "/games/" + gameId + "/win");
 		onValue(winRef, (snapshot) => {
 			const data = snapshot.val();
+			if(!data.play_again) {
 			document.getElementById("game_winner").innerHTML = data.winner + " wins";
 			document.getElementById("play_again").setAttribute("style","");
+			}
 		});
 		var playAgainRef =  ref(database, "/games/" + gameId + "/win/play_again");
 		onValue(playAgainRef, (snapshot) => {
 			const data = snapshot.val();
 			if(data != null) {
-				document.getElementById("play_again").remove();
+				document.getElementById("play_again").style.visibility = "hidden";
 				let game_end_section = document.getElementById("game_end");
 				let p = document.createElement("p");
 				if(data.play_again == playerId) {
-					p.innerHTML = "Sent a request to play again!";
+					let textNode = "Sent a request to play again!";
+					p.appendChild(textNode);
 				}
 				else if(data.play_again == opponentId) {
-					p.innerHTML = opponentId + " sent a play again request.";
+					let textNode = opponentId + " wants to play again.";
+					p.appendChild(textNode);
 				}
 				game_end_section.appendChild(p);
 				if(data.play_again == opponentId) {
