@@ -31,7 +31,7 @@ function back_to_lobby() {
 	set(ref(database,"games/" + gameId + "/delete"), {delete: true});
 	go_home();
 }
-window.back_to_lobby = back_to_lobby();
+window.back_to_lobby = back_to_lobby;
 function go_home() {
 	window.location.href = "https://jcamille2023.github.io/pong/";
 }
