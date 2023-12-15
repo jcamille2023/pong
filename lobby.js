@@ -43,6 +43,7 @@ else {
 function go_home() {
 	window.location.href = "https://jcamille2023.github.io/pong/";
 }
+window.go_home = go_home;
 onAuthStateChanged(auth, (user) => {
 	if(user) {
 		playerId = user.uid;
