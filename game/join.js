@@ -55,7 +55,7 @@ function keyDownHandler(e) {
 	}
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
-		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2 + 15))};
+		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
 		if(r_paddle_pos < 1) {
 			return "Limit reached";
 		}
@@ -96,7 +96,7 @@ onAuthStateChanged(auth, (user) => {
 		var leftPaddleRef =  ref(database, "/games/" + gameId + "/positions/left_paddle");
 		onValue(leftPaddleRef, (snapshot) => {
 			const data = snapshot.val();
-			right_paddle.style.top = String(400 - data.ypos) + "px";
+			right_paddle.style.top = String(290 - data.ypos) + "px";
 		});
 		var rightPaddleRef =  ref(database, "/games/" + gameId + "/positions/right_paddle");
 		onValue(rightPaddleRef, (snapshot) => {
