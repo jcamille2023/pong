@@ -106,9 +106,11 @@ function start_game() {
   var data;
   get(child(dbRef, "games/" + gameId)).then((snapshot) => {
     data = snapshot.val();
+    console.log(data);
     data.game_start = true;
+    set(ref(database, "games/" + gameId), data);
   });
-  set(ref(database, "games/" + gameId), data);
+  
 }
 
 
