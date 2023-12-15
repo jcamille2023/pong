@@ -26,6 +26,10 @@ var playerId;
 var opponentId;
 var interval;
 
+function go_home() {
+	window.location.href = "https://jcamille2023.github.io/pong/";
+}
+window.go_home = go_home;
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -135,13 +139,20 @@ onAuthStateChanged(auth, (user) => {
 		playerId = user.uid;
 		get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         		const data = snapshot.val();
+			if(data == null) {
+				document.getElementById("pong").innerHTML = "<h1>Ping Pong Online</h1><br><p>This game does not exist.</p>";
+				let button = document.createElement("button");
+				button.setAttribute("onclick","go_home()");
+				button.innerHTML = "Back to main menu";
+				document.getElementById("pong").appendChild(button); 
+			}
 			console.log(data);
 			opponentId = data.player_2;
 			console.log(data.player_2);
 			console.log(opponentId);
 			document.getElementById("player_id").innerHTML = playerId;
 			document.getElementById("opponent_id").innerHTML = opponentId;
-			document.getElementById("game_id").innerHTML = gameId;'
+			document.getElementById("game_id").innerHTML = gameId;
 			start_game();
 		});	
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
