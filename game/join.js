@@ -35,10 +35,10 @@ window.go_home = go_home;
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
+		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
 		if(r_paddle_pos.ypos > 291) {
 			return "Limit reached";
 		}
-		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
 		updates['/games/' + gameId + "/positions/right_paddle"] = r_paddle_pos;
 		update(dbRef, updates);
 	}
