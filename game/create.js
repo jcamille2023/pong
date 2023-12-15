@@ -38,9 +38,15 @@ window.go_home = go_home;
 function play_again() {
 	let updates = {};
 	updates["games/" + gameId + "/win/play_again"] = {play_again: playerId};
+	update(dbRef, updates);
 }
 window.play_again = play_again;
-
+function agree() {
+	let updates = {}
+	updates["games/" + gameId + "/win/play_again"] = {play_again: true;}
+	update(dbRef, updates);
+}
+window.agree = agree;
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
@@ -190,6 +196,7 @@ onAuthStateChanged(auth, (user) => {
 			const data = snapshot.val();
 			console.log(data);
 			document.getElementById("game_winner").innerHTML = data.winner + " wins";
+			document.getElementById("play_again").setAttribute("style","");
 		});
 		var deleteRef =  ref(database, "/games/" + gameId + "/delete");
 		onValue(deleteRef, (snapshot) => {
