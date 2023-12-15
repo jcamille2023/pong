@@ -55,7 +55,7 @@ function keyDownHandler(e) {
 	}
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
-		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2 + 15};
+		let r_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2 + 15))};
 		if(r_paddle_pos < 1) {
 			return "Limit reached";
 		}
