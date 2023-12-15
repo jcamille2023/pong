@@ -80,7 +80,7 @@ onAuthStateChanged(auth, (user) => {
     		onValue(ballRef, (snapshot) => {
 			const data = snapshot.val();
 			ball.style.left = String(566 - data.xpos) + "px";
-			ball.style.top = String(400 - data.ypos) + "px";
+			ball.style.top = String(367 - data.ypos) + "px";
 		});
 		var leftPaddleRef =  ref(database, "/games/" + gameId + "/positions/left_paddle");
 		onValue(leftPaddleRef, (snapshot) => {
