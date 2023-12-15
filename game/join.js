@@ -79,18 +79,18 @@ onAuthStateChanged(auth, (user) => {
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
     		onValue(ballRef, (snapshot) => {
 			const data = snapshot.val();
-			ball.style.left = String(600 - data.xpos) + "px";
+			ball.style.left = String(566 - data.xpos) + "px";
 			ball.style.top = String(400 - data.ypos) + "px";
 		});
 		var leftPaddleRef =  ref(database, "/games/" + gameId + "/positions/left_paddle");
 		onValue(leftPaddleRef, (snapshot) => {
 			const data = snapshot.val();
-			right_paddle.style.top = String(400 - data.ypos) + "px";
+			right_paddle.style.top = String(data.ypos) + "px";
 		});
 		var rightPaddleRef =  ref(database, "/games/" + gameId + "/positions/right_paddle");
 		onValue(rightPaddleRef, (snapshot) => {
 			const data = snapshot.val();
-			left_paddle.style.top = String(400 - data.ypos) + "px";
+			left_paddle.style.top = String(data.ypos) + "px";
 		});
 		var winRef =  ref(database, "/games/" + gameId + "/win");
 		onValue(winRef, (snapshot) => {
