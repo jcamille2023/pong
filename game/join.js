@@ -38,13 +38,13 @@ function keyDownHandler(e) {
 		if(r_paddle_pos.ypos < 1 || r_paddle_pos > 291) {
 			return "Limit reached";
 		}
-		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) + 10};
+		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) + 15};
 		updates['/games/' + gameId + "/positions/right_paddle"] = r_paddle_pos;
 		update(dbRef, updates);
 	}
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
-		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) - 10};
+		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) - 15};
 		if(r_paddle_pos.ypos < 1 || r_paddle_pos > 291) {
 			return "Limit reached";
 		}
@@ -62,7 +62,8 @@ onAuthStateChanged(auth, (user) => {
 		playerId = user.uid;
 		get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         		const data = snapshot.val();
-			      opponentId = data.player_1;
+			console.log(data);
+			opponentId = data.player_1;
 		});
     document.getElementById("player_id").innerHTML = playerId;
 		document.getElementById("opponent_id").innerHTML = opponentId;
@@ -70,21 +71,23 @@ onAuthStateChanged(auth, (user) => {
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
     		onValue(ballRef, (snapshot) => {
 			const data = snapshot.val();
-			console.log(data);
 			ball.style.left = String(data.xpos) + "px";
 			ball.style.top = String(data.ypos) + "px";
 		});
 		var leftPaddleRef =  ref(database, "/games/" + gameId + "/positions/left_paddle");
 		onValue(leftPaddleRef, (snapshot) => {
 			const data = snapshot.val();
-			console.log(data);
 			left_paddle.style.top = String(data.ypos) + "px";
 		});
 		var rightPaddleRef =  ref(database, "/games/" + gameId + "/positions/right_paddle");
 		onValue(rightPaddleRef, (snapshot) => {
 			const data = snapshot.val();
-			console.log(data);
 			right_paddle.style.top = String(data.ypos) + "px";
+		});
+		var winRef =  ref(database, "/games/" + gameId + "/win");
+		onValue(winRef, (snapshot) => {
+			const data = snapshot.val();
+			document.getElementById("game_winner").innerHTML = data.winner + " wins";
 		});
 }				
 	else{console.log("User is signed out.");}
