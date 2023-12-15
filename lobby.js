@@ -90,10 +90,15 @@ onAuthStateChanged(auth, (user) => {
 			 const data = snapshot.val();
 			 console.log(data);
 			 if (data.game_start == true) {
-				 var url = new URL("https://jcamille2023.github.io/pong/game");
-         url.searchParams.append('game_id', gameId);
-         console.log(url);
-         window.location.href = url;
+				if (searchParams.get('game_id') == "new") {
+				var url = new URL("https://jcamille2023.github.io/pong/game/create");
+				}
+				else {
+				var url = new URL("https://jcamille2023.github.io/pong/game/join");
+				}
+         			url.searchParams.append('game_id', gameId);
+         			console.log(url);
+         			window.location.href = url;
 			 }
 		});
   }
