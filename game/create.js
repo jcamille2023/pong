@@ -116,6 +116,7 @@ onAuthStateChanged(auth, (user) => {
 		playerId = user.uid;
 		get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         		const data = snapshot.val();
+			console.log(data);
 			opponentId = data.player_2;
 		});
 		document.getElementById("player_id").innerHTML = playerId;
@@ -140,7 +141,7 @@ onAuthStateChanged(auth, (user) => {
 			console.log(data);
 			right_paddle.style.top = String(data.ypos) + "px";
 		});
-		setInterval(move, 10);
+		interval = setInterval(move, 10);
 }				
 	else{console.log("User is signed out.");}
 });
