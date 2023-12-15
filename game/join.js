@@ -126,12 +126,14 @@ onAuthStateChanged(auth, (user) => {
 				let game_end_section = document.getElementById("game_end");
 				if(data.play_again == playerId) {
 					let p = document.createElement("p");
+					p.setAttribute("id","prompt");
 					let textNode = document.createTextNode("Sent a request to play again!");
 					p.appendChild(textNode);
 					game_end_section.appendChild(p);
 				}
 				else if(data.play_again == opponentId) {
 					let p = document.createElement("p");
+					p.setAttribute("id","prompt");
 					let textNode = document.createTextNode(opponentId + " wants to play again.");
 					p.appendChild(textNode);
 					game_end_section.appendChild(p);
@@ -139,6 +141,12 @@ onAuthStateChanged(auth, (user) => {
 					button.setAttribute("onclick","agree");
 					button.innerHTML = "Play again?";
 					game_end_section.appendChild(button);
+				}
+				else if (data.play_again == true) {
+				if(document.getElementById("agree")) {
+					document.getElementById("agree").remove();
+				}
+				document.getElementById("prompt").remove();
 				}
 			}
 		});
