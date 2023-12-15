@@ -124,12 +124,13 @@ onAuthStateChanged(auth, (user) => {
 			if(data != null) {
 				document.getElementById("play_again").style.visibility = "hidden";
 				let game_end_section = document.getElementById("game_end");
-				let p = document.createElement("p");
 				if(data.play_again == playerId) {
+					let p = document.createElement("p");
 					let textNode = "Sent a request to play again!";
 					p.appendChild(textNode);
 				}
 				else if(data.play_again == opponentId) {
+					let p = document.createElement("p");
 					let textNode = opponentId + " wants to play again.";
 					p.appendChild(textNode);
 				}
