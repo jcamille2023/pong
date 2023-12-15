@@ -21,9 +21,6 @@ const left_paddle = document.getElementById("l_paddle");
 const right_paddle = document.getElementById("r_paddle");
 var playerId;
 var opponentId;
-if(l_paddle_pos.ypos < 1 || l_paddle_pos > 291) {
-	return "Limit reached";
-}
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
