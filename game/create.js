@@ -126,6 +126,9 @@ function move() {
 	console.log(ball_xpos);
 	
 }
+function start_game() {
+	interval = setInterval(move,10)
+}
 
 onAuthStateChanged(auth, (user) => {
 	if(user) {
@@ -134,10 +137,13 @@ onAuthStateChanged(auth, (user) => {
         		const data = snapshot.val();
 			console.log(data);
 			opponentId = data.player_2;
-		});
-		document.getElementById("player_id").innerHTML = playerId;
-		document.getElementById("opponent_id").innerHTML = opponentId;
-		document.getElementById("game_id").innerHTML = gameId;
+			console.log(data.player_2);
+			console.log(opponentId);
+			document.getElementById("player_id").innerHTML = playerId;
+			document.getElementById("opponent_id").innerHTML = opponentId;
+			document.getElementById("game_id").innerHTML = gameId;'
+			start_game();
+		});	
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
     		onValue(ballRef, (snapshot) => {
 			const data = snapshot.val();
@@ -163,7 +169,7 @@ onAuthStateChanged(auth, (user) => {
 			console.log(data);
 			document.getElementById("game_winner").innerHTML = data.winner + " wins";
 		});
-		interval = setInterval(move, 10);
+		
 }				
 	else{console.log("User is signed out.");}
 });
