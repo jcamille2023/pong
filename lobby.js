@@ -40,7 +40,9 @@ else {
   gameId = searchParams.get('game_id');
 }
 
-
+function go_home() {
+	window.location.href = "https://jcamille2023.github.io/pong/";
+}
 onAuthStateChanged(auth, (user) => {
 	if(user) {
 		playerId = user.uid;
@@ -77,7 +79,10 @@ onAuthStateChanged(auth, (user) => {
         const data = snapshot.val();
 	if(data == null) {
 		document.getElementById("center").innerHTML = "<h1>Ping Pong Online</h1><br><p>This game does not exist.</p>";
-		document.getElementById("center").innerHTML += "<button onclick='window.location.href=https://jcamille2023.github.io/pong/'>Back to main menu</button>";
+		let button = document.createElement("button");
+		button.setAttribute("onclick","go_home()")
+		button.innerHTML = "Back to main menu";
+		document.getElementById("center").appendChild(button); 
 	}
         data.player_2 = playerId;
 	opponentId = data.player_1;
