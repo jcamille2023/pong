@@ -65,9 +65,9 @@ onAuthStateChanged(auth, (user) => {
 			if(data == null) {
 				document.getElementById("pong").innerHTML = "<p>This game does not exist.</p>";
 				let button = document.createElement("button");
-				button.setAttribute("onclick","go_home()")
+				button.setAttribute("onclick","go_home()");
 				button.innerHTML = "Back to main menu";
-				document.getElementById("center").appendChild(button); 
+				document.getElementById("pong").appendChild(button); 
 			}
 			console.log(data);
 			console.log(data.player_1);
