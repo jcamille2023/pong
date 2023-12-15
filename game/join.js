@@ -46,7 +46,7 @@ window.play_again = play_again;
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
-		let r_paddle_pos = {ypos: 400 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 15};
+		let r_paddle_pos = {ypos: 290 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 15};
 		if(r_paddle_pos.ypos > 291) {
 			return "Limit reached";
 		}
@@ -55,7 +55,7 @@ function keyDownHandler(e) {
 	}
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
-		let r_paddle_pos = {ypos: 400 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
+		let r_paddle_pos = {ypos: 290 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
 		if(r_paddle_pos < 1) {
 			return "Limit reached";
 		}
@@ -112,21 +112,23 @@ onAuthStateChanged(auth, (user) => {
 		var playAgainRef =  ref(database, "/games/" + gameId + "/win/play_again");
 		onValue(playAgainRef, (snapshot) => {
 			const data = snapshot.val();
-			document.getElementById("play_again").remove();
-			let game_end_section = document.getElementById("game_end");
-			let p = document.createElement("p");
-			if(data.play_again == playerId) {
-				p.innerHTML = "Sent a request to play again!";
-			}
-			else if(data.play_again == opponentId) {
-				p.innerHTML = opponentId + " sent a play again request.";
-			}
-			game_end_section.appendChild(p);
-			if(data.play_again == opponentId) {
-				let button = document.createElement("button");
-				button.setAttribute("onclick","agree");
-				button.innerHTML = "Play again?";
-				game_end_section.appendChild(button);
+			if(data != null) {
+				document.getElementById("play_again").remove();
+				let game_end_section = document.getElementById("game_end");
+				let p = document.createElement("p");
+				if(data.play_again == playerId) {
+					p.innerHTML = "Sent a request to play again!";
+				}
+				else if(data.play_again == opponentId) {
+					p.innerHTML = opponentId + " sent a play again request.";
+				}
+				game_end_section.appendChild(p);
+				if(data.play_again == opponentId) {
+					let button = document.createElement("button");
+					button.setAttribute("onclick","agree");
+					button.innerHTML = "Play again?";
+					game_end_section.appendChild(button);
+				}
 			}
 		});
 		var deleteRef =  ref(database, "/games/" + gameId + "/delete");
