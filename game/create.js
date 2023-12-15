@@ -37,12 +37,12 @@ function random_number_gen(b) {
 }
 
 
-const t = random_number_gen(2);
-if(t == 1) {
-	dx = 2;
+const t = random_number_gen(40);
+if(t < 20) {
+	dx = 1;
 }
 else {
-	dx = -2;
+	dx = -1;
 }
 dy = 2;
 
