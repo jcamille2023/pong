@@ -202,6 +202,7 @@ onAuthStateChanged(auth, (user) => {
 		var playAgainRef =  ref(database, "/games/" + gameId + "/win/play_again");
 		onValue(playAgainRef, (snapshot) => {
 			const data = snapshot.val();
+			if (data != null) {
 			document.getElementById("play_again").remove();
 			let game_end_section = document.getElementById("game_end");
 			let p = document.createElement("p");
@@ -231,6 +232,7 @@ onAuthStateChanged(auth, (user) => {
 				button.setAttribute("onclick","agree");
 				button.innerHTML = "Play again?";
 				game_end_section.appendChild(button);
+			}
 			}
 		});
 		
