@@ -42,8 +42,8 @@ function play_again() {
 }
 window.play_again = play_again;
 function agree() {
-	let updates = {}
-	updates["games/" + gameId + "/win/play_again"] = {play_again: true;}
+	let updates = {};
+	updates["games/" + gameId + "/win/play_again"] = {play_again: true};
 	update(dbRef, updates);
 }
 window.agree = agree;
