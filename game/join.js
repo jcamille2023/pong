@@ -26,10 +26,21 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
 const dbRef = ref(getDatabase());
+
+function back_to_lobby() {
+	set(ref(database,"games/" + gameId + "/delete"), {delete: true});
+	go_home();
+}
+window.back_to_lobby = back_to_lobby();
 function go_home() {
 	window.location.href = "https://jcamille2023.github.io/pong/";
 }
 window.go_home = go_home;
+function play_again() {
+	let updates = {};
+	updates["games/" + gameId + "/win/play_again"] = {play_again: playerId};
+}
+window.play_again = play_again;
 
 
 function keyDownHandler(e) {
@@ -96,7 +107,38 @@ onAuthStateChanged(auth, (user) => {
 		onValue(winRef, (snapshot) => {
 			const data = snapshot.val();
 			document.getElementById("game_winner").innerHTML = data.winner + " wins";
+			document.getElementById("play_again").setAttribute("style","");
 		});
+		var playAgainRef =  ref(database, "/games/" + gameId + "/win/play_again");
+		onValue(playAgainRef, (snapshot) => {
+			const data = snapshot.val();
+			document.getElementById("play_again").remove();
+			let game_end_section = document.getElementById("game_end");
+			let p = document.createElement("p");
+			if(data.play_again == playerId) {
+				p.innerHTML = "Sent a request to play again!";
+			}
+			else if(data.play_again == opponentId) {
+				p.innerHTML = opponentId + " sent a play again request.";
+			}
+			game_end_section.appendChild(p);
+			if(data.play_again == opponentId) {
+				let button = document.createElement("button");
+				button.setAttribute("onclick","agree");
+				button.innerHTML = "Play again?";
+				game_end_section.appendChild(button);
+			}
+		});
+		var deleteRef =  ref(database, "/games/" + gameId + "/delete");
+		onValue(deleteRef, (snapshot) => {
+			const data = snapshot.val();
+			if(data.delete == true) {
+				remove(ref(database, "/games/" + gameId));
+				go_home();
+			}
+		});
+		
+		
 }				
 	else{console.log("User is signed out.");}
 });
