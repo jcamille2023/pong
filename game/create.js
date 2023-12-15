@@ -118,6 +118,9 @@ onAuthStateChanged(auth, (user) => {
         		const data = snapshot.val();
 			opponentId = data.player_2;
 		});
+		document.getElementById("player_id").innerHTML = playerId;
+		document.getElementById("opponent_id").innerHTML = opponentId;
+		document.getElementById("game_id").innerHTML = gameId;
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
     		onValue(ballRef, (snapshot) => {
 			const data = snapshot.val();
