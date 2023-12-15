@@ -209,11 +209,13 @@ onAuthStateChanged(auth, (user) => {
 		var playAgainRef =  ref(database, "/games/" + gameId + "/win/play_again");
 		onValue(playAgainRef, (snapshot) => {
 			const data = snapshot.val();
+			console.log(data);
 			if (data != null) {
-			document.getElementById("play_again").remove();
+			document.getElementById("play_again").setAttribute("style","hidden");
 			let game_end_section = document.getElementById("game_end");
 			let p = document.createElement("p");
 			if (data.play_again == true) {
+				document.getElementById("button").remove();
 				var ball_position = {xpos: 280, ypos: 183};
 				let updates = {};
 				updates['/games/' + gameId + "/positions/ball"] = ball_position;
@@ -237,6 +239,7 @@ onAuthStateChanged(auth, (user) => {
 			if(data.play_again == opponentId) {
 				let button = document.createElement("button");
 				button.setAttribute("onclick","agree");
+				button.setAttribute("id","agree");
 				button.innerHTML = "Play again?";
 				game_end_section.appendChild(button);
 			}
