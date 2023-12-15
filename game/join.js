@@ -21,16 +21,23 @@ const left_paddle = document.getElementById("l_paddle");
 const right_paddle = document.getElementById("r_paddle");
 var playerId;
 var opponentId;
-
+if(l_paddle_pos.ypos < 1 || l_paddle_pos > 291) {
+	return "Limit reached";
+}
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
 const dbRef = ref(getDatabase());
 
+
+
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
+		if(r_paddle_pos.ypos < 1 || r_paddle_pos > 291) {
+			return "Limit reached";
+		}
 		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) + 10};
 		updates['/games/' + gameId + "/positions/right_paddle"] = r_paddle_pos;
 		update(dbRef, updates);
@@ -38,6 +45,9 @@ function keyDownHandler(e) {
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
 		let r_paddle_pos = {ypos: Number(right_paddle.style.top.slice(0,right_paddle.style.top.length-2)) - 10};
+		if(r_paddle_pos.ypos < 1 || r_paddle_pos > 291) {
+			return "Limit reached";
+		}
 		updates['/games/' + gameId + "/positions/right_paddle"] = r_paddle_pos;
 		update(dbRef, updates);
 	}
