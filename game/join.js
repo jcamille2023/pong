@@ -19,24 +19,14 @@ var gameId = searchParams.get('game_id');
 const ball = document.getElementById("ball");
 const left_paddle = document.getElementById("l_paddle");
 const right_paddle = document.getElementById("r_paddle");
-var direction_changed = false;
-var dx;
-var dy;
 var playerId;
 var opponentId;
-var interval;
 
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase();
 const dbRef = ref(getDatabase());
-
-function random_number_gen(b) {
-	return Math.floor(Math.random() * b);
-}
-
-
 
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
@@ -86,7 +76,6 @@ onAuthStateChanged(auth, (user) => {
 			console.log(data);
 			right_paddle.style.top = String(data.ypos) + "px";
 		});
-		setInterval(move, 10);
 }				
 	else{console.log("User is signed out.");}
 });
