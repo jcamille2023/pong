@@ -60,11 +60,12 @@ onAuthStateChanged(auth, (user) => {
 		get(child(dbRef,"games/" + gameId + "/players")).then((snapshot) => {
         		const data = snapshot.val();
 			console.log(data);
+			console.log(data.player_1);
 			opponentId = data.player_1;
+			document.getElementById("player_id").innerHTML = playerId;
+			document.getElementById("opponent_id").innerHTML = opponentId;
+			document.getElementById("game_id").innerHTML = gameId;
 		});
-    document.getElementById("player_id").innerHTML = playerId;
-		document.getElementById("opponent_id").innerHTML = opponentId;
-		document.getElementById("game_id").innerHTML = gameId;
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
     		onValue(ballRef, (snapshot) => {
 			const data = snapshot.val();
