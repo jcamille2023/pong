@@ -50,6 +50,9 @@ function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
 		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 10};
+		if(l_paddle_pos.ypos < 1 || l_paddle_pos > 291) {
+			return "Limit reached";
+		}
 		updates['/games/' + gameId + "/positions/left_paddle"] = l_paddle_pos;
 		update(dbRef, updates);
 		// left_paddle.style.top = String(Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 10) + "px"; will be moved to control by firebase
