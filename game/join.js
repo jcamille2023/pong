@@ -146,9 +146,11 @@ onAuthStateChanged(auth, (user) => {
 		onValue(deleteRef, (snapshot) => {
 			const data = snapshot.val();
 			console.log(data);
-			if(data.delete == true && data != null) {
+			if (data != null) {
+			if(data.delete == true) {
 				remove(ref(database, "/games/" + gameId));
 				go_home();
+			}
 			}
 		});
 		
