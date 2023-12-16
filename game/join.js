@@ -148,6 +148,7 @@ onAuthStateChanged(auth, (user) => {
 					document.getElementById("agree").remove();
 				}
 				document.getElementById("prompt").remove();
+				document.getElementById("game_winner").innerHTML = "";
 				}
 			}
 		});
