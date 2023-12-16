@@ -195,8 +195,10 @@ onAuthStateChanged(auth, (user) => {
 		onValue(winRef, (snapshot) => {
 			const data = snapshot.val();
 			console.log(data);
+			if (!data.play_again) {
 			document.getElementById("game_winner").innerHTML = data.winner + " wins";
 			document.getElementById("play_again").setAttribute("style","");
+			}
 		});
 		var deleteRef =  ref(database, "/games/" + gameId + "/delete");
 		onValue(deleteRef, (snapshot) => {
