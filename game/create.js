@@ -140,12 +140,12 @@ function move() {
 	
 }
 function start_game() {
-	const t = random_number_gen(40);
-	if(t < 20) {
+	const t = random_number_gen(10);
+	if(t < 5) {
 		dx = 1;
 	}
 	else {
-		dx = -1;
+		dx = -1; 
 	}
 	dy = 2;
 	interval = setInterval(move,10);
@@ -211,13 +211,15 @@ onAuthStateChanged(auth, (user) => {
 			const data = snapshot.val();
 			console.log(data);
 			if (data != null) {
-			document.getElementById("play_again").style.visibility = "hidden";
+			document.getElementById("play_again").setAttribute("style", "visibility: hidden");
 			let game_end_section = document.getElementById("game_end");
 			let p = document.createElement("p");
+			p.setAttribute("id","prompt");
 			if (data.play_again == true) {
 				if(document.getElementById("agree")) {
 					document.getElementById("agree").remove();
 				}
+				document.getElementById("prompt").remove();
 				var ball_position = {xpos: 280, ypos: 183};
 				let updates = {};
 				updates['/games/' + gameId + "/positions/ball"] = ball_position;
