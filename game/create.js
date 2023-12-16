@@ -220,6 +220,7 @@ onAuthStateChanged(auth, (user) => {
 					document.getElementById("agree").remove();
 				}
 				document.getElementById("prompt").remove();
+				document.getElementById("game_winner").innerHTML = "";
 				var ball_position = {xpos: 280, ypos: 183};
 				let updates = {};
 				updates['/games/' + gameId + "/positions/ball"] = ball_position;
