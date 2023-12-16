@@ -138,7 +138,8 @@ onAuthStateChanged(auth, (user) => {
 					p.appendChild(textNode);
 					game_end_section.appendChild(p);
 					let button = document.createElement("button");
-					button.setAttribute("onclick","agree");
+					button.setAttribute("onclick","agree()");
+					button.setAttribute("id","agree");
 					button.innerHTML = "Play again?";
 					game_end_section.appendChild(button);
 				}
