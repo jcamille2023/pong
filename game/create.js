@@ -119,11 +119,13 @@ function move() {
 	let ball_ypos = Number(ball.style.top.slice(0,ball.style.top.length-2));
 	
 	if(ball_ypos >= lp_pos && ball_ypos <= (lp_pos + 110) && ball_xpos <= 25 && direction_changed == false) {
-		dx = -1.25*dx;
+		dx = -1.1*dx;
+		dy = 1.1*dy
 		direction_changed = true;
 	}
 	if(ball_ypos >= rp_pos && ball_ypos <= (rp_pos + 110) && ball_xpos >= 539 && direction_changed == false) {
-		dx = -1.25*dx;
+		dx = -1.1*dx;
+		dy = 1.1*dy;
 		direction_changed = true;
 	}
 	if(ball_ypos >= 367 || ball_ypos <= 0) {
