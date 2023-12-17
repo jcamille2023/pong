@@ -144,13 +144,13 @@ function move() {
 function start_game() {
 	const t = random_number_gen(10);
 	if(t < 5) {
-		dx = 1;
+		dx = 0.5;
 	}
 	else {
-		dx = -1; 
+		dx = -0.5; 
 	}
-	dy = 2;
-	interval = setInterval(move,10);
+	dy = 1;
+	interval = setInterval(move,5);
 }
 
 onAuthStateChanged(auth, (user) => {
