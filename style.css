@@ -32,3 +32,10 @@ html {
 }
 
 
+button {
+  background: transparent;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid white;
+}
