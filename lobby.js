@@ -163,9 +163,6 @@ function delete_game() {
 	go_home();
 }
 window.delete_game = delete_game;
-function go_home() {
-	window.location.href = "https://jcamille2023.github.io/pong/";
-}
 
 window.start_game = start_game;
 window.delete_session = delete_session;
