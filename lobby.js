@@ -128,14 +128,16 @@ function start_game() {
 }
 
 function get_username(c) {
-	 get(child(dbRef, "players/" + c)).then((snapshot) => {
-		 const data = snapshot.val();
+	let data;
+	get(child(dbRef, "players/" + c)).then((snapshot) => {
+		 data = snapshot.val();
 		 console.log(data);
-		 console.log(Object.values(data));
-		 username = Object.values(data)[0];
-		 console.log(username);
-		 return username;
 	 });
+	console.log(data);
+	console.log(Object.values(c));
+	username = Object.values(c)[0];
+	console.log(username);
+	return username;
 }
 
 function delete_session() {
