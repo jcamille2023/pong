@@ -36,17 +36,7 @@ const list_players = document.getElementById("lists_of_games");
      updateProfile(auth.currentUser, {displayName: playerId}).then(() => {document.getElementById("user_id").innerHTML = playerId;}).catch((error) => {
          console.log("Some kind of error occured.");
 });
-    
-/*    user.displayName = playerId;
     set(ref(database, "/players/" + playerId), {username: playerId});
-    const usernameRef = ref(database, 'players/' + playerId);
-    onValue(usernameRef, (snapshot) => {
-        const data = snapshot.val();
-        console.log(data);
-        username = data.username;
-        console.log(username);
-        document.getElementById("user_id").innerHTML = username;
-    }); */
 const gamesRef = ref(database, 'games/');
 onValue(gamesRef, (snapshot) => {
     const data = snapshot.val();
@@ -138,12 +128,13 @@ function submit_username() {
     updateProfile(auth.currentUser, {displayName: username}).then(() => {
         content.style.display = "inline";
         content2.innerHTML = "";
+        set(ref(database, "/players/" + playerId), {username: username});
         document.getElementById("user_id").innerHTML = username;
     }).catch((error) => {
   // An error occurred
   // ...
 });
-    // set(ref(database, "/players/" + playerId), {username: username});
+   
    
 }
 window.submit_username = submit_username;
