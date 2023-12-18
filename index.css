@@ -47,10 +47,8 @@ table#center {
     text-align: center;
 }
 
-#center > button, #lists_of_games > button {
+
+input {
   background: transparent;
   color: white;
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid white;
 }
