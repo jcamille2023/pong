@@ -169,8 +169,14 @@ onAuthStateChanged(auth, (user) => {
 			opponentId = data.player_2;
 			console.log(data.player_2);
 			console.log(opponentId);
-			document.getElementById("player_id").innerHTML = playerId;
-			document.getElementById("opponent_id").innerHTML = opponentId;
+			document.getElementById("player_id").innerHTML = user.displayName;
+				get(child(dbRef, "players/" + opponentId)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(data)[0];
+					document.getElementById("opponent_id").innerHTML = username;
+	 			});
 			document.getElementById("game_id").innerHTML = gameId;
 			start_game();
 		});	
