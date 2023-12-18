@@ -70,7 +70,7 @@ function declare_win(a) {
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
-		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
+		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 45};
 		if(l_paddle_pos > 291) {
 			return "Limit reached";
 		}
@@ -81,7 +81,7 @@ function keyDownHandler(e) {
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		// left_paddle.style.top = String(Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 10) - "px"; will be moved to control by firebase
 		let updates = {};
-		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 15};
+		let l_paddle_pos = {ypos: Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 45};
 		if(l_paddle_pos.ypos < 1) {
 			return "Limit reached";
 		}
@@ -204,7 +204,14 @@ onAuthStateChanged(auth, (user) => {
 			const data = snapshot.val();
 			console.log(data);
 			if (!data.play_again) {
-			document.getElementById("game_winner").innerHTML = data.winner + " wins";
+				document.getElementById("player_id").innerHTML = user.displayName;
+				get(child(dbRef, "players/" + data.winner)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(data)[0];
+					document.getElementById("opponent_id").innerHTML = username + " wins!";
+	 			});
 			document.getElementById("play_again").setAttribute("style","");
 			}
 		});
