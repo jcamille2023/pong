@@ -71,8 +71,8 @@ onAuthStateChanged(auth, (user) => {
 			 console.log(data);
 			 if (data.player_2) {
 				 opponentId = data.player_2;
-				 get_username(opponentId)
-				 document.getElementById("opponent_id").innerHTML = username;
+				 console.log(get_username(opponentId));
+				 document.getElementById("opponent_id").innerHTML = get_username(opponentId);
          			document.getElementById("start_button").setAttribute("style","");
 			 }
 		});
@@ -89,8 +89,8 @@ onAuthStateChanged(auth, (user) => {
 	}
         data.player_2 = playerId;
 	opponentId = data.player_1;
-	get_username(opponentId)
-	document.getElementById("opponent_id").innerHTML = username;
+	console.log(get_username(opponentId));
+	document.getElementById("opponent_id").innerHTML = get_username(opponentId);
         add_player_2(data);
       });
     }
@@ -134,6 +134,7 @@ function get_username(c) {
 		 console.log(Object.values(data));
 		 username = Object.values(data)[0];
 		 console.log(username);
+		 return username;
 	 });
 }
 
