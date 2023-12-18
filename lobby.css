@@ -36,21 +36,3 @@ table#center {
     border: 2px solid white;
 }
 
-#center {
-    width:500px;
-    height:500px;
-    position:fixed;
-    margin-left:-250px; /* half of width */
-    margin-top:-250px;  /* half of height */
-    top:50%;
-    left:50%;
-    text-align: center;
-}
-
-#center > button, #lists_of_games > button {
-  background: transparent;
-  color: white;
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid white;
-}
