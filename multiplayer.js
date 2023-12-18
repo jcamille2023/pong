@@ -158,7 +158,7 @@ function set_username() {
     
     submit_button.innerHTML = "Submit";
     username_input.setAttribute("type","text");
-    username_input.setAttribute("input","user_input");
+    username_input.setAttribute("id","user_input");
     submit_button.setAttribute("onclick","submit_username()");
     
     window_title.appendChild(title_text_1);
