@@ -39,3 +39,10 @@ button {
   margin: 5px;
   border: 1px solid white;
 }
+
+button:hover {
+  transition: 0.3s;
+  color: black;
+  background: white;
+}
+
