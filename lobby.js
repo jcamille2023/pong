@@ -31,7 +31,6 @@ var playerId;
 var opponentId;
 var gameId;
 var game_start;
-var username;
 const searchParams = new URLSearchParams(window.location.search);
 console.log(searchParams.get('game_id'));
 if (searchParams.get('game_id') == "new") {
@@ -75,7 +74,7 @@ onAuthStateChanged(auth, (user) => {
 		 			let data = snapshot.val();
 		 			console.log(data);
 		 			console.log(Object.values(data));
-		 			let username = Object.values(c)[0];
+		 			let username = Object.values(data)[0];
 					document.getElementById("opponent_id").innerHTML = username;
 	 			});
 				
@@ -100,7 +99,7 @@ onAuthStateChanged(auth, (user) => {
 		 			let data = snapshot.val();
 		 			console.log(data);
 		 			console.log(Object.values(data));
-		 			let username = Object.values(c)[0];
+		 			let username = Object.values(data)[0];
 					document.getElementById("opponent_id").innerHTML = username;
 	 			});
 				
