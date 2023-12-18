@@ -26,14 +26,6 @@ position: absolute;
   position: absolute;
 }
 
-button {
-  background: transparent;
-  color: white;
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid white;
-}
-
 #r_paddle {
   top: 143px;
   left: 569px;
