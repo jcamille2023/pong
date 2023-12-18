@@ -120,7 +120,14 @@ onAuthStateChanged(auth, (user) => {
 		onValue(winRef, (snapshot) => {
 			const data = snapshot.val();
 			if(!data.play_again) {
-			document.getElementById("game_winner").innerHTML = data.winner + " wins";
+				document.getElementById("player_id").innerHTML = user.displayName;
+				get(child(dbRef, "players/" + data.winner)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(data)[0];
+					document.getElementById("game_winner").innerHTML = username + " wins!";
+	 			});
 			document.getElementById("play_again").setAttribute("style","");
 			}
 		});
@@ -140,14 +147,20 @@ onAuthStateChanged(auth, (user) => {
 				else if(data.play_again == opponentId) {
 					let p = document.createElement("p");
 					p.setAttribute("id","prompt");
-					let textNode = document.createTextNode(opponentId + " wants to play again.");
-					p.appendChild(textNode);
-					game_end_section.appendChild(p);
-					let button = document.createElement("button");
-					button.setAttribute("onclick","agree()");
-					button.setAttribute("id","agree");
-					button.innerHTML = "Play again?";
-					game_end_section.appendChild(button);
+					get(child(dbRef, "players/" + data.winner)).then((snapshot) => {
+		 				let data = snapshot.val();
+		 				console.log(data);
+		 				console.log(Object.values(data));
+		 				let username = Object.values(data)[0];
+						let textNode = document.createTextNode(username + " wants to play again.");
+						p.appendChild(textNode);
+						game_end_section.appendChild(p);
+						let button = document.createElement("button");
+						button.setAttribute("onclick","agree()");
+						button.setAttribute("id","agree");
+						button.innerHTML = "Play again?";
+						game_end_section.appendChild(button);
+	 				});	
 				}
 				else if (data.play_again == true) {
 				if(document.getElementById("agree")) {
