@@ -71,7 +71,7 @@ onAuthStateChanged(auth, (user) => {
 			 console.log(data);
 			 if (data.player_2) {
 				 opponentId = data.player_2;
-				get(child(dbRef, "players/" + c)).then((snapshot) => {
+				get(child(dbRef, "players/" + opponentId)).then((snapshot) => {
 		 			let data = snapshot.val();
 		 			console.log(data);
 		 			console.log(Object.values(data));
@@ -96,7 +96,7 @@ onAuthStateChanged(auth, (user) => {
         data.player_2 = playerId;
 	opponentId = data.player_1;
 	// console.log(get_username(opponentId));
-	get(child(dbRef, "players/" + c)).then((snapshot) => {
+	get(child(dbRef, "players/" + opponentId)).then((snapshot) => {
 		 			let data = snapshot.val();
 		 			console.log(data);
 		 			console.log(Object.values(data));
