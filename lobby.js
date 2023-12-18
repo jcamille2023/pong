@@ -49,7 +49,7 @@ onAuthStateChanged(auth, (user) => {
 		playerId = user.uid;
 		console.log("User is signed in");
 		console.log(playerId);
-		document.getElementById("user_id").innerHTML += playerId;
+		document.getElementById("user_id").innerHTML = user.displayName;
 		document.getElementById("game_id").innerHTML = gameId;
 		const gamesRef = ref(database, 'games/' + gameId);
 		onValue(gamesRef, (snapshot) => {
@@ -70,7 +70,7 @@ onAuthStateChanged(auth, (user) => {
 			 console.log(data);
 			 if (data.player_2) {
 				 opponentId = data.player_2;
-				 document.getElementById("opponent_id").innerHTML = opponentId;
+				 document.getElementById("opponent_id").innerHTML = get_username(opponentId);
          			document.getElementById("start_button").setAttribute("style","");
 			 }
 		});
@@ -81,13 +81,13 @@ onAuthStateChanged(auth, (user) => {
 	if(data == null) {
 		document.getElementById("center").innerHTML = "<h1>Ping Pong Online</h1><br><p>This game does not exist.</p>";
 		let button = document.createElement("button");
-		button.setAttribute("onclick","go_home()")
+		button.setAttribute("onclick","go_home()");
 		button.innerHTML = "Back to main menu";
 		document.getElementById("center").appendChild(button); 
 	}
         data.player_2 = playerId;
 	opponentId = data.player_1;
-	document.getElementById("opponent_id").innerHTML = opponentId;
+	document.getElementById("opponent_id").innerHTML = get_username(opponentId);
         add_player_2(data);
       });
     }
@@ -124,6 +124,12 @@ function start_game() {
   
 }
 
+function get_username(c) {
+	 get(child(dbRef, "players/" + c)).then((snapshot) => {
+		 const data = snapshot.val();
+		 return data.username;
+	 });
+}
 
 function delete_session() {
 	let game_ref = ref(database, "/games/" + gameId);
