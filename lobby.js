@@ -95,8 +95,15 @@ onAuthStateChanged(auth, (user) => {
 	}
         data.player_2 = playerId;
 	opponentId = data.player_1;
-	console.log(get_username(opponentId));
-	document.getElementById("opponent_id").innerHTML = get_username(opponentId);
+	// console.log(get_username(opponentId));
+	get(child(dbRef, "players/" + c)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(c)[0];
+					document.getElementById("opponent_id").innerHTML = username;
+	 			});
+				
         add_player_2(data);
       });
     }
