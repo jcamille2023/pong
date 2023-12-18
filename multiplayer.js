@@ -19,9 +19,6 @@ const list_players = document.getElementById("lists_of_games");
     appId: "1:967048086805:web:2b5d4563794ed5934ed51c",
     measurementId: "G-RBV9QDF1HP"
   };
-
-
-
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -126,44 +123,51 @@ function playWith(a) {
       }
 window.playWith = playWith;
 
-function add_username(a) {
-    set(ref(database, "/players/" + playerId), {username: a});
-}
 
 function submit_username() {
     let content = document.getElementById("content");
-    let username_input = new_variables[1];
+    let content2 = new_variables[1];
+    let username_input = new_variables[0];
     username = username_input.value;
     console.log(username);
-    add_username(username)
-    content.innerHTML = new_variables[0];
-    
+    set(ref(database, "/players/" + playerId), {username: username});
+    content.style.display = "inline";
+    content2.innerHTML = "";    
 }
 window.submit_username = submit_username;
 
 function set_username() {
     let content = document.getElementById("content");
-    new_variables.push(content.innerHTML);
-    let content2 = document.createElement("div");
-    let window_title = document.createElement("h1");
+    content.style.display = "none";
+    
+    let content2 = document.getElementById("set_username");
+    
+    let window_title = document.createElement("h3");
     let title_text_1 = document.createTextNode("Change your username");
-    window_title.appendChild(title_text_1);
-    content2.appendChild(window_title);
+    
     let username_paragraph = document.createElement("p");
     let paragraph_text_1 = document.createTextNode("Enter your new username");
-    username_paragraph.appendChild(paragraph_text_1);
-    content2.appendChild(username_paragraph);
+
     let username_input = document.createElement("input");
-    username_input.setAttribute("type","text");
+    
+    
     content2.appendChild(username_input);
+    
     let submit_button = document.createElement("button");
     let br = document.createElement("br");
+    
     submit_button.innerHTML = "Submit";
+    username_input.setAttribute("type","text");
     submit_button.setAttribute("onclick","submit_username()");
+    
+    window_title.appendChild(title_text_1);
+    content2.appendChild(window_title);
     content2.appendChild(br);
     content2.appendChild(submit_button);
+    username_paragraph.appendChild(paragraph_text_1);
+    content2.appendChild(username_paragraph);
+    
     new_variables.push(username_input);
-    content.innerHTML = "";
-    content.appendChild(content2);
+    new_variables.push(content2);
 }
 window.set_username = set_username;
