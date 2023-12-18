@@ -3,7 +3,7 @@ const list_players = document.getElementById("lists_of_games");
 
     // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAuth, onAuthStateChanged, signInAnonymously, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+  import { getAuth, onAuthStateChanged, signInAnonymously, setPersistence, browserSessionPersistence, updateProfile } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
   import { getDatabase, set, ref, onValue } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -33,6 +33,11 @@ const list_players = document.getElementById("lists_of_games");
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
     playerId = user.uid;
+     updateProfile(auth.currentUser, {displayName: playerId}).then(() => {document.getElementById("user_id").innerHTML = playerId;}).catch((error) => {
+         console.log("Some kind of error occured.");
+});
+    
+/*    user.displayName = playerId;
     set(ref(database, "/players/" + playerId), {username: playerId});
     const usernameRef = ref(database, 'players/' + playerId);
     onValue(usernameRef, (snapshot) => {
@@ -41,7 +46,7 @@ const list_players = document.getElementById("lists_of_games");
         username = data.username;
         console.log(username);
         document.getElementById("user_id").innerHTML = username;
-    });
+    }); */
 const gamesRef = ref(database, 'games/');
 onValue(gamesRef, (snapshot) => {
     const data = snapshot.val();
@@ -130,9 +135,16 @@ function submit_username() {
     let username_input = new_variables[0];
     username = username_input.value;
     console.log(username);
-    set(ref(database, "/players/" + playerId), {username: username});
-    content.style.display = "inline";
-    content2.innerHTML = "";    
+    updateProfile(auth.currentUser, {displayName: username}).then(() => {
+        content.style.display = "inline";
+        content2.innerHTML = "";
+        document.getElementById("user_id").innerHTML = username;
+    }).catch((error) => {
+  // An error occurred
+  // ...
+});
+    // set(ref(database, "/players/" + playerId), {username: username});
+   
 }
 window.submit_username = submit_username;
 
@@ -150,9 +162,6 @@ function set_username() {
 
     let username_input = document.createElement("input");
     
-    
-    content2.appendChild(username_input);
-    
     let submit_button = document.createElement("button");
     let br = document.createElement("br");
     
@@ -162,10 +171,12 @@ function set_username() {
     
     window_title.appendChild(title_text_1);
     content2.appendChild(window_title);
+    content2.appendChild(username_paragraph);
     content2.appendChild(br);
+    content2.appendChild(username_input);
     content2.appendChild(submit_button);
     username_paragraph.appendChild(paragraph_text_1);
-    content2.appendChild(username_paragraph);
+    
     
     new_variables.push(username_input);
     new_variables.push(content2);
