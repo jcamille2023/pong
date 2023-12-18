@@ -40,6 +40,7 @@ const list_players = document.getElementById("lists_of_games");
     const usernameRef = ref(database, 'players/' + playerId);
     onValue(usernameRef, (snapshot) => {
         const data = snapshot.val();
+        console.log(data);
         username = data.username;
         console.log(username);
         document.getElementById("user_id").innerHTML = username;
