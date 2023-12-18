@@ -71,8 +71,14 @@ onAuthStateChanged(auth, (user) => {
 			 console.log(data);
 			 if (data.player_2) {
 				 opponentId = data.player_2;
-				 console.log(get_username(opponentId));
-				 document.getElementById("opponent_id").innerHTML = get_username(opponentId);
+				get(child(dbRef, "players/" + c)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(c)[0];
+					document.getElementById("opponent_id").innerHTML = username;
+	 			});
+				
          			document.getElementById("start_button").setAttribute("style","");
 			 }
 		});
@@ -127,24 +133,7 @@ function start_game() {
   
 }
 
-function get_username_2(c) {
-	console.log(c);
-	console.log(Object.values(c));
-	let username = Object.values(c)[0];
-	console.log(username);
-	return username;
-}
 
-function get_username(c) {
-	let data;
-	get(child(dbRef, "players/" + c)).then((snapshot) => {
-		 data = snapshot.val();
-		 console.log(data);
-		 let username = get_username_2(data);
-		 return username;
-	 });
-	
-}
 
 function delete_session() {
 	let game_ref = ref(database, "/games/" + gameId);
