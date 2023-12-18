@@ -121,8 +121,8 @@ window.playWith = playWith;
 
 function submit_username() {
     let content = document.getElementById("content");
-    let content2 = new_variables[1];
-    let username_input = new_variables[0];
+    let content2 = new_variables[0];
+    let username_input = document.getElementById("user_input").value;
     username = username_input.value;
     console.log(username);
     updateProfile(auth.currentUser, {displayName: username}).then(() => {
@@ -158,6 +158,7 @@ function set_username() {
     
     submit_button.innerHTML = "Submit";
     username_input.setAttribute("type","text");
+    username_input.setAttribute("input","user_input");
     submit_button.setAttribute("onclick","submit_username()");
     
     window_title.appendChild(title_text_1);
@@ -167,9 +168,8 @@ function set_username() {
     content2.appendChild(username_input);
     content2.appendChild(submit_button);
     username_paragraph.appendChild(paragraph_text_1);
+
     
-    
-    new_variables.push(username_input);
     new_variables.push(content2);
 }
 window.set_username = set_username;
