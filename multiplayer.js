@@ -122,7 +122,7 @@ window.playWith = playWith;
 function submit_username() {
     let content = document.getElementById("content");
     let content2 = new_variables[0];
-    let username_input = document.getElementById("user_input").value;
+    let username_input = document.getElementById("user_input");
     username = username_input.value;
     console.log(username);
     updateProfile(auth.currentUser, {displayName: username}).then(() => {
