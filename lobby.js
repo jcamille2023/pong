@@ -127,17 +127,23 @@ function start_game() {
   
 }
 
+function get_username_2(c) {
+	console.log(c);
+	console.log(Object.values(c));
+	let username = Object.values(c)[0];
+	console.log(username);
+	return username;
+}
+
 function get_username(c) {
 	let data;
 	get(child(dbRef, "players/" + c)).then((snapshot) => {
 		 data = snapshot.val();
 		 console.log(data);
+		 let username = get_username_2(data);
+		 return username;
 	 });
-	console.log(data);
-	console.log(Object.values(data));
-	username = Object.values(data)[0];
-	console.log(username);
-	return username;
+	
 }
 
 function delete_session() {
