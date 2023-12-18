@@ -35,7 +35,7 @@ const list_players = document.getElementById("lists_of_games");
     console.log("User is signed in");
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/auth.user
-    const playerId = user.uid;
+    playerId = user.uid;
     set(ref(database, "/players/" + playerId), {username: playerId});
     const usernameRef = ref(database, 'players/' + playerId);
     onValue(usernameRef, (snapshot) => {
