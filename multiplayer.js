@@ -128,7 +128,7 @@ window.playWith = playWith;
 function submit_username() {
     let content = document.getElementById("content");
     let username_input = new_variables[1];
-    username = username_input.value();
+    username = username_input.value;
     set(ref(database, "/players/" + playerId), {username: username});
     content.innerHTML = new_variables[0];
     
