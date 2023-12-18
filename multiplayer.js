@@ -125,11 +125,16 @@ function playWith(a) {
       }
 window.playWith = playWith;
 
+function add_username(a) {
+    set(ref(database, "/players/" + playerId), {username: a});
+}
+
 function submit_username() {
     let content = document.getElementById("content");
     let username_input = new_variables[1];
     username = username_input.value;
-    set(ref(database, "/players/" + playerId), {username: username});
+    console.log(username);
+    add_username(username)
     content.innerHTML = new_variables[0];
     
 }
@@ -151,7 +156,10 @@ function set_username() {
     username_input.setAttribute("type","text");
     content2.appendChild(username_input);
     let submit_button = document.createElement("button");
+    let br = document.createElement("br");
+    submit_button.innerHTML = "Submit";
     submit_button.setAttribute("onclick","submit_username()");
+    content2.appendChild(br);
     content2.appendChild(submit_button);
     new_variables.push(username_input);
     content.innerHTML = "";
