@@ -106,6 +106,17 @@ onAuthStateChanged(auth, (user) => {
         add_player_2(data);
       });
     }
+		var deleteRef =  ref(database, "/games/" + gameId + "/delete");
+		onValue(deleteRef, (snapshot) => {
+			const data = snapshot.val();
+			console.log(data);
+			if (data != null) {
+			if(data.delete == true) {
+				remove(ref(database, "/games/" + gameId));
+				go_home();
+			}
+			}
+		});
     var startRef = ref(database, "/games/" + gameId);
 		onValue(startRef, (snapshot) => {
 			 const data = snapshot.val();
@@ -145,6 +156,15 @@ function delete_session() {
 	let game_ref = ref(database, "/games/" + gameId);
 	remove(game_ref);
 	console.log("Game session deleted.");
+}
+
+function delete_game() {
+	set(ref(database,"games/" + gameId + "/delete"), {delete: true});
+	go_home();
+}
+window.delete_game = delete_game;
+function go_home() {
+	window.location.href = "https://jcamille2023.github.io/pong/";
 }
 
 window.start_game = start_game;
