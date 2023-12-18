@@ -90,8 +90,14 @@ onAuthStateChanged(auth, (user) => {
 			console.log(data);
 			console.log(data.player_1);
 			opponentId = data.player_1;
-			document.getElementById("player_id").innerHTML = playerId;
-			document.getElementById("opponent_id").innerHTML = opponentId;
+			document.getElementById("player_id").innerHTML = user.displayName;
+				get(child(dbRef, "players/" + opponentId)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(data)[0];
+					document.getElementById("opponent_id").innerHTML = username;
+	 			});
 			document.getElementById("game_id").innerHTML = gameId;
 		});
 		var ballRef = ref(database, "/games/" + gameId + "/positions/ball");
