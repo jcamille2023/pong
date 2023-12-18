@@ -127,6 +127,7 @@ function start_game() {
 function get_username(c) {
 	 get(child(dbRef, "players/" + c)).then((snapshot) => {
 		 const data = snapshot.val();
+		 console.log(data);
 		 return data.username;
 	 });
 }
