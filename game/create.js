@@ -255,7 +255,13 @@ onAuthStateChanged(auth, (user) => {
 				p.innerHTML = "Sent a request to play again!";
 			}
 			else if(data.play_again == opponentId) {
-				p.innerHTML = opponentId + " sent a play again request.";
+				get(child(dbRef, "players/" + data.winner)).then((snapshot) => {
+		 			let data = snapshot.val();
+		 			console.log(data);
+		 			console.log(Object.values(data));
+		 			let username = Object.values(data)[0];
+					p.innerHTML = username + " sent a play again request.";
+	 			});
 			}
 			game_end_section.appendChild(p);
 			if(data.play_again == opponentId) {
