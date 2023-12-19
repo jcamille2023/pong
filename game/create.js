@@ -255,7 +255,7 @@ onAuthStateChanged(auth, (user) => {
 				p.innerHTML = "Sent a request to play again!";
 			}
 			else if(data.play_again == opponentId) {
-				get(child(dbRef, "players/" + data.winner)).then((snapshot) => {
+				get(child(dbRef, "players/" + opponentId)).then((snapshot) => {
 		 			let data = snapshot.val();
 		 			console.log(data);
 		 			console.log(Object.values(data));
