@@ -53,7 +53,7 @@ window.agree = agree;
 function keyDownHandler(e) {
 	if (e.key == "Down" || e.key == "ArrowDown") {
 		let updates = {};
-		let r_paddle_pos = {ypos: 290 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 15};
+		let r_paddle_pos = {ypos: 290 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) - 45};
 		if(r_paddle_pos.ypos > 291) {
 			return "Limit reached";
 		}
@@ -62,7 +62,7 @@ function keyDownHandler(e) {
 	}
 	else if (e.key == "Up" || e.key == "ArrowUp") {
 		let updates = {};
-		let r_paddle_pos = {ypos: 290 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 15};
+		let r_paddle_pos = {ypos: 290 - Number(left_paddle.style.top.slice(0,left_paddle.style.top.length-2)) + 45};
 		if(r_paddle_pos < 1) {
 			return "Limit reached";
 		}
