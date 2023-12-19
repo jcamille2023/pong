@@ -210,7 +210,7 @@ onAuthStateChanged(auth, (user) => {
 		 			console.log(data);
 		 			console.log(Object.values(data));
 		 			let username = Object.values(data)[0];
-					document.getElementById("opponent_id").innerHTML = username + " wins!";
+					document.getElementById("game_winner").innerHTML = username + " wins!";
 	 			});
 			document.getElementById("play_again").setAttribute("style","");
 			}
